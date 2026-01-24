@@ -1,0 +1,38 @@
+name: Deploy to EC2
+
+on:
+  push:
+    branches:
+      - dev
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Setup SSH
+        run: |
+          mkdir -p /tmp/sshkey && touch /tmp/sshkey/ssh
+          echo "${{ secrets.EC2_SSH_KEY }}" > /tmp/sshkey/ssh
+          chmod 600 /tmp/sshkey/ssh
+
+      - name: Deploy on EC2
+        run: |
+          ssh -o StrictHostKeychecking=no -i /tmp/sshkey/ssh ubuntu@${{ secrets.EC2_STAGING_HOST }} << 'EOF'
+            set -e
+
+            export NVM_DIR="$HOME/.nvm"
+            [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
+
+            nvm use default
+
+            cd aws-test
+
+            git pull origin dev
+
+            npm install
+
+            pm2 restart all || pm2 start npm --name "express" -- start
+
+            pm2 save
+          EOF

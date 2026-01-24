@@ -6,7 +6,7 @@ const app = express();
 app.use(cors());
 
 app.get("/", (_req, res) => {
-  res.send("in prod branch");
+  res.send("in dev branch \n hello there");
 });
 
 app.listen(3000, (err) => {
