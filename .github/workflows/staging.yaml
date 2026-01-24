@@ -12,7 +12,7 @@ jobs:
     steps:
       - name: Setup SSH
         run: |
-          touch /tmp/sshkey/ssh
+          mkdir -p /tmp/sshkey/ssh && touch /tmp/sshkey/ssh
           echo "${{ secrets.EC2_SSH_KEY }}" > /tmp/sshkey/ssh
           chmod 600 /tmp/sshkey/ssh
 
