@@ -12,13 +12,13 @@ jobs:
     steps:
       - name: Setup SSH
         run: |
-          mkdir -p ~/.ssh
-          echo "${{ secrets.EC2_SSH_KEY }}" > ~/tmp/sshkey
-          chmod 600 ~/tmp/sshkey
+          mkdir -p /tmp/sshkey
+          echo "${{ secrets.EC2_SSH_KEY }}" > /tmp/sshkey
+          chmod 600 /tmp/sshkey
 
       - name: Deploy on EC2
         run: |
-          ssh ubuntu@${{ secrets.EC2_STAGING_HOST }} << 'EOF'
+          ssh -i /tmp/sshkey ubuntu@${{ secrets.EC2_STAGING_HOST }} << 'EOF'
             set -e
 
             cd aws-test
