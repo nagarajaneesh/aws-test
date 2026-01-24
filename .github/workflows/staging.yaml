@@ -18,7 +18,7 @@ jobs:
 
       - name: Deploy on EC2
         run: |
-          ssh -i /tmp/sshkey ubuntu@${{ secrets.EC2_STAGING_HOST }} << 'EOF'
+          ssh -o StrictHostKeychecking=no -i /tmp/sshkey ubuntu@${{ secrets.EC2_STAGING_HOST }} << 'EOF'
             set -e
 
             cd aws-test
