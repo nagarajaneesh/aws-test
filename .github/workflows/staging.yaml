@@ -12,9 +12,9 @@ jobs:
     steps:
       - name: Setup SSH
         run: |
-          mkdir -p /tmp/sshkey
-          echo "${{ secrets.EC2_SSH_KEY }}" > /tmp/sshkey
-          chmod 600 /tmp/sshkey
+          mkdir -p /tmp/sshkey && touch /tmp/sshkey/ssh
+          echo "${{ secrets.EC2_SSH_KEY }}" > /tmp/sshkey/ssh
+          chmod 600 /tmp/sshkey/ssh
 
       - name: Deploy on EC2
         run: |
