@@ -21,6 +21,11 @@ jobs:
           ssh -o StrictHostKeychecking=no -i /tmp/sshkey/ssh ubuntu@${{ secrets.EC2_STAGING_HOST }} << 'EOF'
             set -e
 
+            export NVM_DIR="$HOME/.nvm"
+            [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
+
+            nvm use default
+
             cd aws-test
 
             git pull origin dev
