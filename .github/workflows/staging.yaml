@@ -40,7 +40,7 @@ jobs:
 
             docker rmi -f ${{ secrets.DEV_DOCKER_HUB_TAG }}
 
-            docker compose up -d --build
+            docker compose up -d
 
             # export NVM_DIR="$HOME/.nvm"
             # [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
