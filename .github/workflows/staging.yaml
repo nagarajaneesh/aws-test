@@ -38,6 +38,8 @@ jobs:
 
             docker compose down
 
+            docker rmi -f ${{ secrets.DEV_DOCKER_HUB_TAG }}
+
             docker compose up -d --build
 
             # export NVM_DIR="$HOME/.nvm"
