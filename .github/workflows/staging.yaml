@@ -21,8 +21,8 @@ jobs:
           git clone ${{ secrets.CLONE_URL }}
           cd aws-test
           git switch dev
-          docker build -t nagarajaneesh83/actions-testing:${{ github.sha }} .
-          docker push nagarajaneesh83/actions-testing:${{ github.sha }}
+          docker build -t ${{ secrets.DEV_DOCKER_HUB_TAG }} .
+          docker push ${{ secrets.DEV_DOCKER_HUB_TAG }}
       - name: Setup SSH
         run: |
           mkdir -p /tmp/sshkey && touch /tmp/sshkey/ssh
@@ -38,7 +38,7 @@ jobs:
 
             docker compose down
 
-            # docker rmi -f nagarajaneesh83/actions-testing:${{ github.sha }}
+            # docker rmi -f ${{ secrets.DEV_DOCKER_HUB_TAG }}
 
             docker compose up -d
 
