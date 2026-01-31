@@ -21,7 +21,7 @@ jobs:
           git clone ${{ secrets.CLONE_URL }}
           cd aws-test
           git switch dev
-          docker build -t ${{ secrets.DEV_DOCKER_HUB_TAG }} .
+          docker build --no-cache -t ${{ secrets.DEV_DOCKER_HUB_TAG }} .
           docker push ${{ secrets.DEV_DOCKER_HUB_TAG }}
       - name: Setup SSH
         run: |
