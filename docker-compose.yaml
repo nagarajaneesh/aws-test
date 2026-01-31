@@ -1,0 +1,12 @@
+version: "3.9"
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: nagarajaneesh83/actions-testing:dev
+    container_name: my-node-app
+    ports:
+      - "3000:3000"
+    command: npm start
