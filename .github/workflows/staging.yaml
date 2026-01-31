@@ -34,6 +34,8 @@ jobs:
           ssh -o StrictHostKeychecking=no -i /tmp/sshkey/ssh ubuntu@${{ secrets.EC2_STAGING_HOST }} << 'EOF'
             set -e
 
+            cd aws-test
+
             docker compose up --build
 
             # export NVM_DIR="$HOME/.nvm"
