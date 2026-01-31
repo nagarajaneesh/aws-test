@@ -36,6 +36,8 @@ jobs:
 
             cd aws-test
 
+            docker compose down
+
             docker compose up -d --build
 
             # export NVM_DIR="$HOME/.nvm"
